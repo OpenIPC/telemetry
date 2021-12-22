@@ -1,1 +1,1 @@
-## The OpenIPC telemetry system
+docs/index.md
