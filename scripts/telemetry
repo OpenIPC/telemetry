@@ -2,3 +2,18 @@
 #
 # The OpenIPC telemetry system
 #
+
+
+tid="UA-xxxxxxxxx-1"
+
+function send() {
+    local cam_id=$1
+    local chip_id=$2
+    local sensor_id=$3
+    curl "https://www.google-analytics.com/batch?v=1&tid=${tid}&cid=${cam_id}&t=event&ec=chip_id&ea=${chip_id}"
+    curl "https://www.google-analytics.com/batch?v=1&tid=${tid}&cid=${cam_id}&t=event&ec=sensor_id&ea=${sensor_id}"
+}
+
+send "c1" "Hi3516cv100" "imx323"
+send "c2" "Hi3516cv200" "imx323"
+
