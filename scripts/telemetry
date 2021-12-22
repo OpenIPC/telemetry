@@ -7,13 +7,10 @@
 tid="UA-xxxxxxxxx-1"
 
 function send() {
-    local cam_id=$1
-    local chip_id=$2
-    local sensor_id=$3
+    local cam_id=$(cat /sys/class/net/$(ip route show default | awk '/default/ {print $5}')/address)
+    local chip_id=$(ipcinfo --chip_id || echo unknown)
+    local sensor_id=$(ipcinfo --long_sensors || echo unknown)
     curl "https://www.google-analytics.com/batch?v=1&tid=${tid}&cid=${cam_id}&t=event&ec=chip_id&ea=${chip_id}"
     curl "https://www.google-analytics.com/batch?v=1&tid=${tid}&cid=${cam_id}&t=event&ec=sensor_id&ea=${sensor_id}"
 }
-
-send "c1" "Hi3516cv100" "imx323"
-send "c2" "Hi3516cv200" "imx323"
 
